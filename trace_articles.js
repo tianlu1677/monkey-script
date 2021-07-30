@@ -1,5 +1,6 @@
 // ==UserScript==
-// @name         抓取详情
+// @name         vanyaha-bot
+// @description  抓取详情
 // @match        https://www.douban.com/*
 // @match        https://36kr.com/*
 // @match        https://www.skateboardchina.com/*
@@ -12,6 +13,8 @@
 // @grant        GM_notification
 // @grant        GM_xmlhttpRequest
 // @grant        GM_registerMenuCommand
+// @version      1.0
+// @namespace    vanyah
 // ==/UserScript==
 
 // token a4f1c173-12e2-4a92-b556-4bd39aba4071xyyds
