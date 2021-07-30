@@ -13,7 +13,7 @@
 // @grant        GM_notification
 // @grant        GM_xmlhttpRequest
 // @grant        GM_registerMenuCommand
-// @version      1.0
+// @version      1.1
 // @namespace    vanyah
 // ==/UserScript==
 
@@ -27,7 +27,6 @@
 
   const href = window.location.href
   const apiUrl = GM_getValue('apiUrl')
-  const authToken = GM_getValue('authToken')
 
   const website = {
     douban: 'https://www.douban.com/',
@@ -46,7 +45,7 @@
   }
 
   const saveData = (params) => {
-    const data = { ...params, api_auth_token: authToken }
+    const data = { ...params }
 
     $.ajax({
       url: apiUrl,
@@ -75,13 +74,11 @@
   }
 
   const setting = () => {
-    GM_registerMenuCommand(`设置token ${authToken}`, () => {
+    GM_registerMenuCommand(`设置地址 ${apiUrl}`, () => {
       setTimeout(() => {
-        const apiUrl = prompt('链接地址', 'https://xxxxx.com/')
-        const authToken = prompt('请输入token', 'xxxx')
-        if (apiUrl !== null && authToken !== '') {
+        const apiUrl = prompt('链接地址', 'https://xxxxx.com?api_auth_token=yyy')
+        if (apiUrl !== null ) {
           GM_setValue('apiUrl', apiUrl)
-          GM_setValue('authToken', authToken)
           unsafeWindow.GM_notification('设置完成', '重新刷新网页')
         }
       }, 1000)
