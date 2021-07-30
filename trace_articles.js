@@ -6,6 +6,7 @@
 // @match        https://www.skateboardchina.com/*
 // @require      http://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // @connect      https://meirixinxue.com
+// @connect      https://xinxue.meirixinxue.com
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_addStyle
@@ -54,8 +55,8 @@
       success: (res) => {
         unsafeWindow.GM_notification(
           res.error
-            ? { title: '抓取失败', text: res.error, timeout: 3000 }
-            : { title: '抓取成功', text: '已保存', timeout: 3000 }
+            ? { title: '抓取失败', text: res.error, timeout: 30000 }
+            : { title: '抓取成功', text: '已保存', timeout: 30000 }
         )
       },
     })
