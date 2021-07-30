@@ -14,7 +14,7 @@
 // @grant        GM_registerMenuCommand
 // ==/UserScript==
 
-// token a4f1c173-12e2-4a92-b556-4bd39aba4071
+// token a4f1c173-12e2-4a92-b556-4bd39aba4071xyyds
 // api https://xinxue.meirixinxue.com/api/traces https://meirixinxue.com/api/traces
 
 ;(function () {
