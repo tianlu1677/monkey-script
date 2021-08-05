@@ -14,7 +14,7 @@
 // @grant        GM_notification
 // @grant        GM_xmlhttpRequest
 // @grant        GM_registerMenuCommand
-// @version      1.2
+// @version      1.3
 // @namespace    vanyah
 // ==/UserScript==
 
