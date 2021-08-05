@@ -18,8 +18,8 @@
 // @namespace    vanyah
 // ==/UserScript==
 
-// token a4f1c173-12e2-4a92-b556-4bd39aba4071xyyds
-// api https://xinxue.meirixinxue.com/api/traces https://meirixinxue.com/api/traces
+//  https://xinxue.meirixinxue.com/api/traces?api_auth_token=3d8435df-c912-4fee-a9fb-151300b9e13d
+//  https://meirixinxue.com/api/traces?api_auth_token=3d8435df-c912-4fee-a9fb-151300b9e13d
 
 ;(function () {
   'use strict'
@@ -36,7 +36,8 @@
   }
 
   const filterParams = () => {
-    let params = { raw_url: href }
+    const api_auth_token = apiUrl.split('?api_auth_token=')[1]
+    let params = { raw_url: href, api_auth_token }
     if (href.includes(website.skateboardchina)) {
       const title = $('.cms_title h2').text()
       const body = $('.detail_content').html()
@@ -46,20 +47,21 @@
   }
 
   const saveData = (params) => {
+    const api = apiUrl.split('?')[0]
     const data = { ...params }
-
-    $.ajax({
-      url: apiUrl,
-      method: 'post',
-      data,
-      success: (res) => {
+    fetch(api, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
         unsafeWindow.GM_notification(
           res.error
             ? { title: '抓取失败', text: res.error, timeout: 30000 }
             : { title: '抓取成功', text: '已保存', timeout: 30000 }
         )
-      },
-    })
+      })
   }
 
   const addSaveBtn = () => {
@@ -78,7 +80,7 @@
     GM_registerMenuCommand(`设置地址 ${apiUrl}`, () => {
       setTimeout(() => {
         const apiUrl = prompt('链接地址', 'https://xxxxx.com?api_auth_token=yyy')
-        if (apiUrl !== null ) {
+        if (apiUrl !== null) {
           GM_setValue('apiUrl', apiUrl)
           unsafeWindow.GM_notification('设置完成', '重新刷新网页')
         }
